@@ -1,4 +1,5 @@
  
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 import Link from "next/link";
 import { db } from "~/server/db";
 export const dynamic = "force-dynamic";
@@ -11,25 +12,19 @@ const mockUrls = [
  
 ];
 
+
+
 const mockData= mockUrls.map((url,index)=>({
   id:index+1,
   url
 }))
 
-
-
-
-export default async function HomePage() {
-  
+async function Images(){
   const images = await db.query.images.findMany({
     orderBy:(model,{desc})=>desc(model.id)
   })
- 
- 
-
-  return (
-    <main className="">
-      <div className="flex flex-wrap gap-4">
+ return(
+    <div className="flex flex-wrap gap-4">
        
         {
         [...images,...images,...images].map((image,index)=>(
@@ -42,6 +37,23 @@ export default async function HomePage() {
         }
 
       </div>
+  )
+}
+
+
+export default async function HomePage() {
+  
+   
+  return (
+    <main className="">
+      <SignedOut>
+        <div className="h-full w-full text-2xl text-center">
+          Please sign in
+        </div>
+      </SignedOut>
+       <SignedIn>
+      <Images/>
+       </SignedIn>
     
     </main>
   );
