@@ -1,6 +1,7 @@
  
 import Link from "next/link";
 import { db } from "~/server/db";
+export const dynamic = "force-dynamic";
 
 const mockUrls = [
 "https://utfs.io/f/01ece4cc-91c2-43d9-a5c0-e3b54c8ed30e-2vi1s1.png",
@@ -19,9 +20,9 @@ const mockData= mockUrls.map((url,index)=>({
 
 
 export default async function HomePage() {
-
+  
   const posts = await db.query.posts.findMany()
-
+ 
   console.log(posts)
 
   return (
