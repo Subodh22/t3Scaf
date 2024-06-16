@@ -1,4 +1,5 @@
  
+
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import Link from "next/link";
 import { db } from "~/server/db";
@@ -27,7 +28,7 @@ async function Images(){
     <div className="flex flex-wrap gap-4">
        
         {
-        [...images,...images,...images].map((image,index)=>(
+       images.map((image,index)=>(
           <div key={image.id+"-"+index} className="w-48">
             <div>{image.name}</div>
             <img src={image.url}/>
