@@ -1,37 +1,30 @@
  
 
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-import Link from "next/link";
-import { db } from "~/server/db";
+import Image from "next/image";
+ 
+import { getMyImages } from "~/queries";
+ 
 export const dynamic = "force-dynamic";
 
-const mockUrls = [
-"https://utfs.io/f/01ece4cc-91c2-43d9-a5c0-e3b54c8ed30e-2vi1s1.png",
-"https://utfs.io/f/e7cb0c17-baf9-4754-8aa4-7b117f7c0340-2vi10g.png",
-"https://utfs.io/f/5449dbbf-760d-4eab-9dce-04b02bde139f-ec3sdn.png",
-"https://utfs.io/f/137b5a64-3a7f-4124-907b-fcd6107becf2-ec3t3f.png"
- 
-];
-
-
-
-const mockData= mockUrls.map((url,index)=>({
-  id:index+1,
-  url
-}))
 
 async function Images(){
-  const images = await db.query.images.findMany({
-    orderBy:(model,{desc})=>desc(model.id)
-  })
+const images = await getMyImages()
+
  return(
-    <div className="flex flex-wrap gap-4">
+    <div className="flex flex-wrap justify-center gap-4">
        
         {
        images.map((image,index)=>(
           <div key={image.id+"-"+index} className="w-48">
             <div>{image.name}</div>
-            <img src={image.url}/>
+            <Image 
+            src={image.url}
+            width={480}
+            height={480}
+            style={{objectFit:"contain"}}
+            alt={image.name}
+            />
 
           </div>
         ))
@@ -39,8 +32,8 @@ async function Images(){
 
       </div>
   )
-}
 
+}
 
 export default async function HomePage() {
   
