@@ -13,13 +13,13 @@ async function Images(){
 const images = await getMyImages()
 
  return(
-    <div className="flex flex-wrap justify-center gap-4">
+    <div className="flex flex-wrap justify-center gap-4 p-4">
        
         {
-       images.map((image,index)=>(
+       [...images,...images,...images].map((image,index)=>(
           <div key={image.id+"-"+index} className="w-48">
             <div>{image.name}</div>
-            <Link href={`/img/${image.id}`} passHref> 
+            <Link  href={`/img/${image.id}`} passHref> 
             <Image 
             src={image.url}
             width={480}
