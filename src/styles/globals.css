@@ -7,3 +7,8 @@
 body{
     @apply bg-black text-white;
 }
+
+dialog{
+    width: 100vh;
+    height: 100vh;
+}
