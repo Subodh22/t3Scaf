@@ -16,7 +16,7 @@ const images = await getMyImages()
     <div className="flex flex-wrap justify-center gap-4 p-4">
        
         {
-       [...images,...images,...images].map((image,index)=>(
+      images.map((image,index)=>(
           <div key={image.id+"-"+index} className="w-48">
             <div>{image.name}</div>
             <Link  href={`/img/${image.id}`} passHref> 
