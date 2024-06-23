@@ -9,11 +9,9 @@ export default async function PhotoModal({
     params:{id:string};
 }
 ){  
-    const vartoNumId = Number(photoId);
-    if (Number.isNaN(vartoNumId)) throw new Error("Invalid Photo Id")
-   
+  
 
     return <Modal>
-       <FullImagePage id={vartoNumId}/>
+       <FullImagePage photoId={photoId}/>
     </Modal>
 }
